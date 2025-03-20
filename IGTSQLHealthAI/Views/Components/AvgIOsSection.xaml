@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IGTSQLHealthAI.Views.Components.AvgIOsSection">
+  <ContentView.Content>
+        <VerticalStackLayout>
+            <Label Text="Average IO Stalls" FontSize="20" FontAttributes="Bold" Margin="0,0,0,5" />
+            <CollectionView ItemsSource="{Binding AvgIOs}" EmptyView="No IO stall data available">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,5" Padding="10" Stroke="LightGray" StrokeThickness="1">
+                            <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto">
+                                <Label Grid.Column="0" Text="{Binding DbName}" FontAttributes="Bold" />
+                                <Label Grid.Column="1" Text="{Binding DbFileName}" />
+                                <Label Grid.Column="2" Text="{Binding AvgIoStallMs}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                 <CollectionView.Header>
+                    <Border BackgroundColor="LightGray" Padding="10">
+                        <Grid ColumnDefinitions="*,*,*">
+                            <Label Grid.Column="0" Text="Database" FontAttributes="Bold" />
+                            <Label Grid.Column="1" Text="File" FontAttributes="Bold" />
+                            <Label Grid.Column="2" Text="Avg IO Stall (ms)" FontAttributes="Bold" />
+                        </Grid>
+                    </Border>
+                </CollectionView.Header>
+            </CollectionView>
+        </VerticalStackLayout>
+  </ContentView.Content>
+</ContentView>

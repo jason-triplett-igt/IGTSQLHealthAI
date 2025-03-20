@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IGTSQLHealthAI.Views.Components.InstanceConfigurationSection">
+  <ContentView.Content>
+        <VerticalStackLayout>
+            <Label Text="Instance Configuration" FontSize="20" FontAttributes="Bold" Margin="0,0,0,5" />
+            <CollectionView ItemsSource="{Binding InstanceData}" EmptyView="No instance data available">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,5" Padding="10" Stroke="LightGray" StrokeThickness="1">
+                            <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto">
+                                <Label Grid.Column="0" Text="{Binding Scope}" FontAttributes="Bold" />
+                                <Label Grid.Column="1" Text="{Binding ConfigItem}" />
+                                <Label Grid.Column="2" Text="{Binding RecommendedValue}" />
+                                <Label Grid.Column="3" Text="{Binding ActualValue}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.Header>
+                    <Border BackgroundColor="LightGray" Padding="10">
+                        <Grid ColumnDefinitions="*,*,*,*">
+                            <Label Grid.Column="0" Text="Scope" FontAttributes="Bold" />
+                            <Label Grid.Column="1" Text="Config Item" FontAttributes="Bold" />
+                            <Label Grid.Column="2" Text="Recommended" FontAttributes="Bold" />
+                            <Label Grid.Column="3" Text="Actual" FontAttributes="Bold" />
+                        </Grid>
+                    </Border>
+                </CollectionView.Header>
+            </CollectionView>
+        </VerticalStackLayout>
+  </ContentView.Content>
+</ContentView>

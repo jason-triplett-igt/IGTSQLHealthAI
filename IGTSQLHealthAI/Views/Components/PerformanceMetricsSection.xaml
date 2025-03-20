@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IGTSQLHealthAI.Views.Components.PerformanceMetricsSection">
+  <ContentView.Content>
+        <VerticalStackLayout>
+            <Label Text="Performance Metrics" FontSize="20" FontAttributes="Bold" Margin="0,0,0,5" />
+
+            <!-- General Server Metrics -->
+            <Label Text="General Server Metrics" FontSize="16" FontAttributes="Bold" Margin="0,10,0,5" />
+            <CollectionView ItemsSource="{Binding GeneralMetrics}" EmptyView="No general metrics available">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,5" Padding="10" Stroke="LightGray" StrokeThickness="1">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <Label Grid.Column="0" Text="{Binding Name}" />
+                                <Label Grid.Column="1" Text="{Binding FormattedValue}" FontAttributes="Bold" HorizontalOptions="End"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Disk Latency Metrics -->
+            <Label Text="Disk Latency" FontSize="16" FontAttributes="Bold" Margin="0,15,0,5" />
+            <CollectionView ItemsSource="{Binding DiskMetrics}" EmptyView="No disk metrics available">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,5" Padding="10" Stroke="LightGray" StrokeThickness="1">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <Label Grid.Column="0" Text="{Binding Name}" />
+                                <Label Grid.Column="1" Text="{Binding FormattedValue}" FontAttributes="Bold" HorizontalOptions="End"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Top 5 Procedures by Runtime -->
+            <Label Text="Top 5 Procedures by Runtime" FontSize="16" FontAttributes="Bold" Margin="0,15,0,5" />
+            <CollectionView ItemsSource="{Binding TopProcedures}" EmptyView="No procedure metrics available">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,5" Padding="10" Stroke="LightGray" StrokeThickness="1">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                <VerticalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="Executions:" FontSize="13" />
+                                        <Label Text="{Binding ExecutionCount, StringFormat='{0:N0}'}"
+                                               FontSize="13" Margin="5,0,0,0" />
+                                    </HorizontalStackLayout>
+
+                                    <HorizontalStackLayout>
+                                        <Label Text="Runtime:" FontSize="13" />
+                                        <Label Text="{Binding FormattedDuration}"
+                                               FontSize="13" Margin="5,0,0,0" />
+                                    </HorizontalStackLayout>
+
+                                    <HorizontalStackLayout>
+                                        <Label Text="Last Run:" FontSize="13" />
+                                        <Label Text="{Binding FormattedLastExecuted}"
+                                               FontSize="13" Margin="5,0,0,0" />
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+  </ContentView.Content>
+</ContentView>

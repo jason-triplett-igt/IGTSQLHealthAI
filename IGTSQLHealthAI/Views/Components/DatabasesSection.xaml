@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IGTSQLHealthAI.Views.Components.DatabasesSection">
+  <ContentView.Content>
+        <VerticalStackLayout>
+            <Label Text="Databases" FontSize="20" FontAttributes="Bold" Margin="0,0,0,5" />
+            <CollectionView ItemsSource="{Binding Databases}" EmptyView="No databases found">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,5" Padding="10" Stroke="LightGray" StrokeThickness="1">
+                            <VerticalStackLayout>
+                                <Grid ColumnDefinitions="*, Auto">
+                                    <Label Grid.Column="0" Text="{Binding Name}" FontAttributes="Bold" />
+                                    <Label Grid.Column="1" Text="{Binding Status}" HorizontalOptions="End"/>
+                                </Grid>
+                                <Label Text="{Binding CreatedDate, StringFormat='Created: {0:d}'}" FontSize="14" />
+                                <Label Text="{Binding FormattedSize}" FontSize="14" />
+                                <Label Text="{Binding VitalInfo}" FontSize="13" TextColor="Gray"
+                                       IsVisible="{Binding VitalInfo, Converter={StaticResource StringNotNullOrEmptyConverter}}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+  </ContentView.Content>
+</ContentView>

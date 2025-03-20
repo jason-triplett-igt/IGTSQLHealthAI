@@ -1,0 +1,24 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IGTSQLHealthAI.Views.SqlServerDashboardPage"
+             xmlns:viewmodel="clr-namespace:IGTSQLHealthAI.ViewModels"
+             x:DataType="viewmodel:SqlServerDashboardViewModel"
+             Title="SQL Server Dashboard">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20">
+
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Button Text="Refresh" Command="{Binding RefreshCommand}" IsEnabled="{Binding IsNotLoading}" />
+                    <Button Text="Connection Settings" Command="{Binding NavigateToConnectionSettingsCommand}" IsEnabled="{Binding IsNotLoading}" />
+                    <!-- New Button -->
+                    <Button Text="Execute Super Perf" Command="{Binding ExecuteSuperPerfCommand}" IsEnabled="{Binding IsNotLoading}" />
+                </HorizontalStackLayout>
+
+                <!-- ... rest of the layout ... -->
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

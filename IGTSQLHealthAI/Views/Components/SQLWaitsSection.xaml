@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IGTSQLHealthAI.Views.Components.SQLWaitsSection">
+  <ContentView.Content>
+        <VerticalStackLayout>
+            <Label Text="SQL Server Waits" FontSize="20" FontAttributes="Bold" Margin="0,0,0,5" />
+            <CollectionView ItemsSource="{Binding SQLWaits}" EmptyView="No SQL wait data available">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,5" Padding="10" Stroke="LightGray" StrokeThickness="1">
+                            <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto">
+                                <Label Grid.Column="0" Text="{Binding WaitType}" FontAttributes="Bold" />
+                                <Label Grid.Column="1" Text="{Binding WaitS}" />
+                                <Label Grid.Column="2" Text="{Binding Percentage}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+
+                 <CollectionView.Header>
+                    <Border BackgroundColor="LightGray" Padding="10">
+                        <Grid ColumnDefinitions="*,*,*">
+                            <Label Grid.Column="0" Text="Wait Type" FontAttributes="Bold" />
+                            <Label Grid.Column="1" Text="Wait Time (s)" FontAttributes="Bold" />
+                            <Label Grid.Column="2" Text="Percentage" FontAttributes="Bold" />
+                        </Grid>
+                    </Border>
+                </CollectionView.Header>
+            </CollectionView>
+        </VerticalStackLayout>
+  </ContentView.Content>
+</ContentView>

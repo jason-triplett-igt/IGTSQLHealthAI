@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:IGTSQLHealthAI.ViewModels"
+             x:Class="IGTSQLHealthAI.Views.ConnectionStringPage"
+             Title="Database Connection">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="SQL Server Connection Settings" FontSize="24" HorizontalOptions="Center" Margin="0,0,0,10" />
+
+            <!-- Server -->
+            <Label Text="Server Name *" />
+            <Entry Text="{Binding Server}" Placeholder="e.g., localhost\SQLEXPRESS or server.domain.com" />
+
+            <!-- Database -->
+            <Label Text="Database Name" />
+            <Entry Text="{Binding Database}" Placeholder="e.g., master" />
+
+            <!-- Authentication -->
+            <Label Text="Authentication" />
+            <VerticalStackLayout Spacing="10">
+                <HorizontalStackLayout Spacing="10">
+                    <RadioButton IsChecked="{Binding UseIntegratedSecurity}" 
+                                 GroupName="AuthType" />
+                    <Label Text="Windows Authentication" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Spacing="10">
+                    <RadioButton IsChecked="{Binding UseIntegratedSecurity, Converter={StaticResource InvertedBoolConverter}}" 
+                                 GroupName="AuthType" />
+                    <Label Text="SQL Server Authentication" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <!-- SQL Server Auth Details -->
+                <VerticalStackLayout IsVisible="{Binding UseIntegratedSecurity, Converter={StaticResource InvertedBoolConverter}}" 
+                                    Spacing="5">
+                    <Label Text="Username" />
+                    <Entry Text="{Binding Username}" Placeholder="SQL Username" />
+
+                    <Label Text="Password" />
+                    <Entry Text="{Binding Password}" IsPassword="True" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+
+            <!-- Result Message -->
+            <Border Padding="10" Stroke="{Binding IsSuccess, Converter={StaticResource BoolToColorConverter}}" StrokeThickness="1"
+                   IsVisible="{Binding ResultMessage, Converter={StaticResource StringNotNullOrEmptyConverter}}">
+                <Label Text="{Binding ResultMessage}" TextColor="{Binding IsSuccess, Converter={StaticResource BoolToColorConverter}}" />
+            </Border>
+
+            <!-- Buttons -->
+            <HorizontalStackLayout Spacing="15" HorizontalOptions="Center" Margin="0,15,0,0">
+                <Button Text="Test Connection" Command="{Binding TestCommand}" 
+                        IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}" 
+                        WidthRequest="150" />
+                <Button Text="Save &amp; Apply" Command="{Binding SaveCommand}" BackgroundColor="#007BFF"
+                        IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}" 
+                        WidthRequest="150" />
+            </HorizontalStackLayout>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Margin="0,10,0,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

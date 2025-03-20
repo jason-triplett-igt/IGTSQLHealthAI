@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IGTSQLHealthAI.Views.Components.TopSPsSection">
+  <ContentView.Content>
+        <VerticalStackLayout>
+            <Label Text="Top Stored Procedures" FontSize="20" FontAttributes="Bold" Margin="0,0,0,5" />
+            <CollectionView ItemsSource="{Binding TopSPs}" EmptyView="No top SP data available">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,5" Padding="10" Stroke="LightGray" StrokeThickness="1">
+                            <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto">
+                                <Label Grid.Column="0" Text="{Binding DbName}" FontAttributes="Bold" />
+                                <Label Grid.Column="1" Text="{Binding SpName}" />
+                                <Label Grid.Column="2" Text="{Binding AvgElapsedTimeMs}" />
+                                <Label Grid.Column="3" Text="{Binding ExecutionCount}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+             </CollectionView.ItemTemplate>
+
+                 <CollectionView.Header>
+                    <Border BackgroundColor="LightGray" Padding="10">
+                        <Grid ColumnDefinitions="*,*,*,*">
+                            <Label Grid.Column="0" Text="Database" FontAttributes="Bold" />
+                            <Label Grid.Column="1" Text="SP Name" FontAttributes="Bold" />
+                            <Label Grid.Column="2" Text="Avg Time (ms)" FontAttributes="Bold" />
+                            <Label Grid.Column="3" Text="Executions" FontAttributes="Bold" />
+                        </Grid>
+                    </Border>
+                </CollectionView.Header>
+            </CollectionView>
+        </VerticalStackLayout>
+  </ContentView.Content>
+</ContentView>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:IGTSQLHealthAI.ViewModels"
+             xmlns:components="clr-namespace:IGTSQLHealthAI.Views.Components"
+             x:Class="IGTSQLHealthAI.Views.SqlServerDashboard"
+             Title="SQL Server Dashboard">
+
+    <Grid Padding="15" RowDefinitions="Auto, *, Auto" ColumnDefinitions="*">
+
+        <!-- Header and Control Section -->
+        <components:DashboardHeader Grid.Row="0" />
+
+        <!-- Dashboard Content -->
+        <ScrollView Grid.Row="1" IsVisible="{Binding ConnectionSuccessful}">
+            <VerticalStackLayout Padding="0,15,0,0">
+
+                <components:InstanceConfigurationSection />
+
+                <components:TopSPsSection />
+
+                <components:StatsFragsSection />
+
+                <components:IndexUsagesSection />
+
+                <components:MissingIndexesSection />
+
+                <components:AvgIOsSection />
+
+                <components:SQLWaitsSection />
+
+                <components:DatabasesSection />
+
+                <components:PerformanceMetricsSection />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Connection Error Message -->
+        <VerticalStackLayout Grid.Row="2"  HorizontalOptions="Center" VerticalOptions="Center"
+                    IsVisible="{Binding ConnectionSuccessful, Converter={StaticResource InvertedBoolConverter}}">
+            <Image Source="database_error.png" WidthRequest="100" HeightRequest="100" />
+            <Label Text="Not Connected to SQL Server"
+                   FontSize="20"
+                   HorizontalTextAlignment="Center" />
+            <Label Text="Please test your connection before viewing dashboard data."
+                   FontSize="16"
+                   HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
